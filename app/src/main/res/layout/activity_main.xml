@@ -10,20 +10,31 @@
         android:id="@+id/button_push-ups"
         android:layout_width="74dp"
         android:layout_height="33dp"
-        android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Push-ups"
         android:textSize="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/text_push-ups"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="0"
+        app:layout_constraintStart_toEndOf="@+id/button_push-ups"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/button_sit-ups"
         android:layout_width="74dp"
         android:layout_height="33dp"
-        android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Sit-ups"
         android:textSize="8dp"
@@ -31,25 +42,14 @@
         app:layout_constraintTop_toBottomOf="@+id/button_push-ups" />
 
     <TextView
-        android:id="@+id/push-ups-number"
+        android:id="@+id/text_sit-ups"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:text="0"
-        app:layout_constraintStart_toEndOf="@+id/button_push-ups"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/sit-ups-number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="24dp"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/button_sit-ups"
-        app:layout_constraintTop_toBottomOf="@+id/push-ups-number" />
+        app:layout_constraintTop_toBottomOf="@+id/text_push-ups" />
 
 </android.support.constraint.ConstraintLayout>
