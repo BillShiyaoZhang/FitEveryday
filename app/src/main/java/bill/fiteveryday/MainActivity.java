@@ -21,23 +21,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button button_push_ups = (Button) findViewById(R.id.button_push_ups);
-        Button button_sit_ups = (Button) findViewById(R.id.button_sit_ups);
         button_push_ups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setNumberDialog((TextView) findViewById(R.id.text_push_ups));
             }
         });
-        button_sit_ups.setOnClickListener(new View.OnClickListener(){
+
+        Button button_sit_ups = (Button) findViewById(R.id.button_sit_ups);
+        button_sit_ups.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 setNumberDialog((TextView) findViewById(R.id.text_sit_ups));
             }
         });
     }
 
     private void setNumberDialog(final TextView text) {
-        AlertDialog.Builder customizeDialog =
+        final AlertDialog.Builder customizeDialog =
                 new AlertDialog.Builder(MainActivity.this);
         final View dialogView = LayoutInflater.from(MainActivity.this)
                 .inflate(R.layout.set_number, null);
@@ -50,7 +51,37 @@ public class MainActivity extends AppCompatActivity {
                         // 获取EditView中的输入内容
                         EditText edit_text =
                                 (EditText) dialogView.findViewById(R.id.edit_text);
-                        text.setText(edit_text.getText().toString());
+                        int i=-1;
+                        try {
+                            i = Integer.valueOf(text.getText().toString());
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(MainActivity.this,
+                                    e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }catch (Exception e1){
+                            Toast.makeText(MainActivity.this,
+                                    "Exception text",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                        try {
+                            i = i + Integer.valueOf(edit_text.getText().toString());
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(MainActivity.this,
+                                    "You could only type numbers!",
+                                    Toast.LENGTH_SHORT).show();
+                        }catch (Exception e1){
+                            Toast.makeText(MainActivity.this,
+                                    "Exception edit_text",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        try {
+                            text.setText(String.valueOf(i));
+                        }catch (Exception e){
+                            Toast.makeText(MainActivity.this,
+                                    "Exception setText(): "+e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
         customizeDialog.show();
