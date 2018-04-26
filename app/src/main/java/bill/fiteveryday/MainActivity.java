@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -46,18 +47,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        Button button_save = (Button) findViewById(R.id.button_save);
-//        button_save.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPref.edit();
-//                editor.putString("push-ups", ((TextView) findViewById(R.id.text_push_ups)).getText().toString());
-//                editor.putString("sit-ups", ((TextView) findViewById(R.id.text_sit_ups)).getText().toString());
-//                editor.commit();
-//            }
-//        });
-
         Button button_clear = (Button) findViewById(R.id.button_clear);
         button_clear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit();
                 ((TextView) findViewById(R.id.text_push_ups)).setText("0");
                 ((TextView) findViewById(R.id.text_sit_ups)).setText("0");
+            }
+        });
+
+        FloatingActionButton button_add = (FloatingActionButton) findViewById(R.id.button_add);
+        button_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
@@ -130,5 +127,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         customizeDialog.show();
+    }
+
+    private void setNewButtonDialog(){
+
     }
 }
