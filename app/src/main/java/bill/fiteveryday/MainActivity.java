@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
@@ -58,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit();
                 ((TextView) findViewById(R.id.text_push_ups)).setText("0");
                 ((TextView) findViewById(R.id.text_sit_ups)).setText("0");
+            }
+        });
+
+        Button button_history = (Button) findViewById(R.id.button_history);
+        button_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(intent);
             }
         });
 
