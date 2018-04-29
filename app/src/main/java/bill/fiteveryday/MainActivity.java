@@ -2,6 +2,7 @@ package bill.fiteveryday;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.support.constraint.ConstraintSet;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -62,14 +64,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button button_history = (Button) findViewById(R.id.button_history);
-        button_history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
-                startActivity(intent);
-            }
-        });
+//        Button button_history = (Button) findViewById(R.id.button_history);
+//        button_history.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+////                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//                startActivity(intent);
+//            }
+//        });
 
 //        FloatingActionButton button_add = (FloatingActionButton) findViewById(R.id.button_add);
 ////        button_add.setOnClickListener(new View.OnClickListener() {
