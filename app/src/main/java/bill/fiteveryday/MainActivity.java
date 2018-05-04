@@ -13,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -61,6 +62,14 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit();
                 ((TextView) findViewById(R.id.text_push_ups)).setText("0");
                 ((TextView) findViewById(R.id.text_sit_ups)).setText("0");
+            }
+        });
+
+        Button button_close = (Button) findViewById(R.id.button_close);
+        button_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.finishAndRemoveTask();
             }
         });
 
@@ -129,8 +138,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // 获取EditView中的输入内容
-                        EditText edit_text = (EditText) dialogView.findViewById(R.id.edit_text);
-                        edit_text.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+                        final EditText edit_text = (EditText) dialogView.findViewById(R.id.edit_text);
+                        edit_text.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
                         int i = -1;
                         try {
                             i = Integer.valueOf(text.getText().toString());
