@@ -22,6 +22,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -31,24 +33,28 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         String push_ups = sharedPref.getString("push-ups", "0");
         String sit_ups = sharedPref.getString("sit-ups", "0");
+        String squats = sharedPref.getString("sit-ups", "0");
 
         ((TextView) findViewById(R.id.text_push_ups)).setText(push_ups);
         ((TextView) findViewById(R.id.text_sit_ups)).setText(sit_ups);
+        ((TextView) findViewById(R.id.text_squats)).setText(squats);
 
         Button button_push_ups = (Button) findViewById(R.id.button_push_ups);
         button_push_ups.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                setNumberDialog((TextView) findViewById(R.id.text_push_ups));
-            }
+            public void onClick(View view) { setNumberDialog((TextView) findViewById(R.id.text_push_ups)); }
         });
 
         Button button_sit_ups = (Button) findViewById(R.id.button_sit_ups);
         button_sit_ups.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                setNumberDialog((TextView) findViewById(R.id.text_sit_ups));
-            }
+            public void onClick(View view) { setNumberDialog((TextView) findViewById(R.id.text_sit_ups)); }
+        });
+
+        Button button_squats = (Button) findViewById(R.id.button_squats);
+        button_squats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { setNumberDialog((TextView) findViewById(R.id.text_squats)); }
         });
 
         Button button_clear = (Button) findViewById(R.id.button_clear);
@@ -59,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("push-ups", "0");
                 editor.putString("sit-ups", "0");
+                editor.putString("squats", "0");
                 editor.commit();
                 ((TextView) findViewById(R.id.text_push_ups)).setText("0");
                 ((TextView) findViewById(R.id.text_sit_ups)).setText("0");
@@ -68,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
         Button button_close = (Button) findViewById(R.id.button_close);
         button_close.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                MainActivity.this.finishAndRemoveTask();
+            public void onClick(View v) { MainActivity.this.finishAndRemoveTask();
             }
         });
 
@@ -125,6 +131,18 @@ public class MainActivity extends AppCompatActivity {
 ////        });
     }
 
+    private void writeToFile(String filename, String fileContents) {
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void setNumberDialog(final TextView text) {
         AlertDialog.Builder customizeDialog =
                 new AlertDialog.Builder(MainActivity.this);
@@ -165,16 +183,16 @@ public class MainActivity extends AppCompatActivity {
                         }
                         text.setText(String.valueOf(i));
                         SharedPreferences.Editor editor = getPreferences(Context.MODE_PRIVATE).edit();
-                        String target = "";
-                        switch (text.getId()) {
-                            case R.id.text_push_ups:
-                                target = "push-ups";
-                                break;
-                            case R.id.text_sit_ups:
-                                target = "sit-ups";
-                                break;
-                        }
-                        editor.putString(target, String.valueOf(i));
+//                        switch (text.getId()) {
+//                            case R.id.text_push_ups:
+//                                target = "push-ups";
+//                                break;
+//                            case R.id.text_sit_ups:
+//                                target = "sit-ups";
+//                                break;
+//                        }
+                        editor.putString(((TextView) findViewById(text.getId())).getText().toString(),
+                                String.valueOf(i));
                         editor.commit();
                     }
                 });
